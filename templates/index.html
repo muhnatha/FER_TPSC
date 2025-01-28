@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#" class="button-link">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Upload Image for Prediction</h1>
+            <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" id="fileInput" required>
+                <button type="submit">Predict</button>
+            </form>
+
+            <!-- Display Error -->
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <!-- Display Prediction Result -->
+            {% if prediction %}
+                <div class="result">
+                    <h2>Prediction Result:</h2>
+                    <p class="expression">{{ prediction }}</p>
+                    <h3>Suggested Songs:</h3>
+                    <ul>
+                        {% for song in songs %}
+                            <li>{{ song }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

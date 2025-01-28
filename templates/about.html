@@ -1,0 +1,77 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+
+    <title>Tentang Kami</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('index') }}">Beranda</a></li>
+          <li><a href="{{ url_for('about') }}">Tentang Kami</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="login.html" class="button-link">Masuk</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Tentang Kami</h1>
+      <div class="card-container">
+        <div class="card">
+          <img src="./assets/daffa.jpg" alt="Profile Picture Manatha" />
+          <h3>Manatha</h3>
+          <p>
+            Nama 
+          </p>
+        </div>
+        <div class="card">
+          <img src="./assets/hafiz.jpg" alt="Profile Picture Naura" />
+          <h3>Naura</h3>
+          <p>
+            Nama
+          </p>
+        </div>
+        <div class="card">
+          <img src="./assets/dzikran.jpg" alt="Profile Picture Jihan" />
+          <h3>Jihan</h3>
+          <p>
+            Nama 
+          </p>
+        </div>
+      </div>
+      <div class="card-container2">
+        <div class="card">
+          <img src="./assets/reyhan.jpg" alt="Profile Picture Kosmas" />
+          <h3>Kosmas</h3>
+          <p>
+            Nama
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="./assets/ilham.jpg" alt="Profile Picture Ilham" />
+          <h3>Muhammad Ilham R. S.</h3>
+          <p>
+            Nama saya Muhammad Ilham Rajo Sikumbang, saya lahir di Kota Bengkulu
+            pada tahun 2005. Legenda mengatakan, saya adalah seorang BATMAN
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
