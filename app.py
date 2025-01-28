@@ -7,6 +7,8 @@ import io
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import numpy as np
+import os
+import gdown
 
 # Define the custom EnsembleModel class (same as used for training)
 class EnsembleModel(nn.Module):
@@ -36,10 +38,22 @@ class EnsembleModel(nn.Module):
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load the trained model (ensure to provide correct path)
+# Google Drive file ID and download URL
+file_id = "1Xqnba2TQI2Fw0_EXACfRp4r5cE9KNIJ2"
+gdrive_url = f"https://drive.google.com/uc?id={file_id}"
+
+# Path to save the model
+model_path = "faceRecognition.pth"
+
+# Download the model if it doesn't exist
+if not os.path.exists(model_path):
+    print("Downloading the model from Google Drive...")
+    gdown.download(gdrive_url, model_path, quiet=False)
+
+# Load the trained model
 device = torch.device('cpu')  # Use 'cuda' if you have a GPU available
 model = EnsembleModel().to(device)
-model.load_state_dict(torch.load(r'C:\Users\HP\proejct_TPSC\model\faceRecognition.pth', map_location=device))
+model.load_state_dict(torch.load(model_path, map_location=device))
 model.eval()  # Set the model to evaluation mode
 
 # Define the same preprocessing transformations used during training
