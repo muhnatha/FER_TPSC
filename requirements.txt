@@ -1,0 +1,8 @@
+Flask
+torch
+torchvision
+albumentations
+pillow
+numpy
+PIL
+gdown
