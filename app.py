@@ -1,9 +1,10 @@
+import os
+import gdown
 import streamlit as st
 import torch
 import torch.nn as nn
 from torchvision import models
 from PIL import Image
-import io
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import numpy as np
@@ -15,7 +16,6 @@ class EnsembleModel(nn.Module):
         self.efficientnet_b4 = models.efficientnet_b4(weights='DEFAULT')
         self.resnet = models.resnet50(weights='DEFAULT')
 
-        # Modify the output layers to match the number of classes in your dataset
         num_classes = 5  # Adjust this according to your problem
         self.efficientnet_b4.classifier[1] = nn.Linear(self.efficientnet_b4.classifier[1].in_features, num_classes)
         self.resnet.fc = nn.Linear(self.resnet.fc.in_features, num_classes)
@@ -26,10 +26,17 @@ class EnsembleModel(nn.Module):
         out = (out_efficientnet + out_resnet) / 2
         return out
 
+# Download model from Google Drive if not present
+model_path = "model.pth"
+if not os.path.exists(model_path):
+    st.info("Downloading the model. This may take a few minutes...")
+    gdrive_url = "https://drive.google.com/uc?id=1Xqnba2TQI2Fw0_EXACfRp4r5cE9KNIJ2"
+    gdown.download(gdrive_url, model_path, quiet=False)
+
 # Load the trained model
 device = torch.device('cpu')
 model = EnsembleModel().to(device)
-model.load_state_dict(torch.load("model.pth", map_location=device))
+model.load_state_dict(torch.load(model_path, map_location=device))
 model.eval()
 
 # Define preprocessing transformations
